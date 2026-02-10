@@ -26,6 +26,8 @@ import EffectivePeople from './EffectivePeople.svg';
 import alcohol from './alcohol.png';
 import shoppingCart from './shopping-cart.svg';
 import heartCard from './heart-card.svg';
+import addToCart from './add-to-cart.svg';
+
 export const assets = {
     libImg,
     Vector,
@@ -54,6 +56,7 @@ export const assets = {
     alcohol,
     shoppingCart,
     heartCard,
+    addToCart,
 }
 
 export const dropDown = [

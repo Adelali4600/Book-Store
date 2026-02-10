@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer/Footer'
 import Navbar from '../components/Navbar/Navbar'
-import MainHero from '../components/Hero/MainHero'
 import api from '../api/Axios'
 import toast from 'react-hot-toast'
 export default function Mainlayout() {
@@ -32,7 +31,6 @@ export default function Mainlayout() {
     return (
         <>
             <Navbar />
-            <MainHero />
             <Outlet />
             <Footer />
         </>

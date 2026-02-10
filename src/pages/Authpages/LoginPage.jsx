@@ -4,31 +4,35 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import axios from 'axios';
+import api from '../../api/Axios';
 import toast from 'react-hot-toast';
 
 export default function LoginPage() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [checkGray, setCheckGray] = useState(false);
+    // const login = useAuthStore(state => state.login);
 
     useEffect(() => {
         const token = localStorage.getItem("token") || sessionStorage.getItem("token");
         if (token) {
+            // login(token);
             navigate("/");
         }
     }, [navigate]);
 
-    const handleLogin = async (values) => {
-        axios.post("http://localhost:1337/api/auth/local", values).then((res) => {
-            let token = res.data.jwt;
-            values.rememberMe ? localStorage.setItem("token", token) : sessionStorage.setItem("token", token);
-            toast.success("Login successful");
-            navigate("/");
-        }).catch((err) => {
-            let errorMessage = err.response?.data?.error?.message || err.data?.error?.message || "Login failed";
-            toast.error(errorMessage);
-        })
+    const handleLogin = (values) => {
+        api.post("/auth/local", values)
+            .then(res => {
+                // login(res.data.jwt);
+                values.rememberMe ? localStorage.setItem("token", res.data.jwt) : sessionStorage.setItem("token", res.data.jwt);
+                navigate("/");
+                toast.success("Login successful");
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error(err.response?.data?.error?.message);
+            });
     }
     const loginSchema = Yup.object({
         identifier: Yup.string().email("Invalid email address").required("Email is required"),

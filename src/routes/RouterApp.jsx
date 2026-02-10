@@ -11,6 +11,8 @@ import ForgetPasswordPage from "../pages/Authpages/ForgetPasswordPage";
 import ProfilePage from "../pages/ProfilePage";
 import BeforeLogin from "../layouts/BeforeLogin";
 import Mainlayout from "../layouts/Mainlayout";
+import MyCartPage from "../pages/MyCartPage";
+import WishListPage from "../pages/WishListPage";
 
 export default function RouterApp() {
     return (
@@ -28,6 +30,8 @@ export default function RouterApp() {
                     <Route path="books" element={<BooksPage />} />
                     <Route path="about" element={<AboutPage />} />
                     <Route path="profile" element={<ProfilePage />} />
+                    <Route path="cart" element={<MyCartPage />} />
+                    <Route path="wishlist" element={<WishListPage />} />
                 </Route>
                 {/* Auth Pages */}
                 <Route element={<BeforeLogin />} >

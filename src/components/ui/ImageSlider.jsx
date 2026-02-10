@@ -8,9 +8,30 @@ export default function ImageSlider() {
             <div className="flex flex-wrap justify-center gap-8">
                 <Swiper
                     modules={[Autoplay]}
-                    loop={true}              // يجعل الحركة لانهائية
-                    slidesPerView={7}        // عدد السلايدات الظاهرة
-                    speed={3000}             // سرعة الحركة (5 ثوانٍ للانتقال الواحدة)
+                    loop={true}
+                    speed={3000}
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        480: {
+                            slidesPerView: 3,
+                            spaceBetween: 15,
+                        },
+                        768: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
+                        },
+                        1024: {
+                            slidesPerView: 5,
+                            spaceBetween: 25,
+                        },
+                        1280: {
+                            slidesPerView: 7,
+                            spaceBetween: 30,
+                        },
+                    }}
                     autoplay={{
                         delay: 0,              // 0 تعني عدم وجود وقفات بين الحركات
                         disableOnInteraction: false,
