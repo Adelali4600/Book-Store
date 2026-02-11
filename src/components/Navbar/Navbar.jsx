@@ -32,9 +32,9 @@ export default function Navbar() {
                 <NavbarLogo />
 
                 <div className="hidden lg:flex items-center gap-6 lg:gap-10 mr-auto ml-6 lg:ml-0">
-                    <LinkItem to={"/"}>home</LinkItem>
-                    <LinkItem to={"/books"}>books</LinkItem>
-                    <LinkItem to={"/about"}>about us</LinkItem>
+                    <NavLink to={"/"} className={({ isActive }) => isActive ? 'text-thirdColor nav-link' : 'text-white nav-link'}>home</NavLink>
+                    <NavLink to={"/books"} className={({ isActive }) => isActive ? 'text-thirdColor nav-link' : 'text-white nav-link'}>books</NavLink>
+                    <NavLink to={"/about"} className={({ isActive }) => isActive ? 'text-thirdColor nav-link' : 'text-white nav-link'}>about us</NavLink>
                 </div>
                 <div className='flex items-center'>
 
@@ -43,7 +43,7 @@ export default function Navbar() {
                             <div className='h-10 flex items-center gap-6'>
                                 <img sizes={32} src={assets.group4} alt={assets.group4} />
                                 <img sizes={32} src={assets.group5} alt={assets.group5} />
-                                <div className='flex items-center gap-2'>
+                                <div className='dropdown dropdown-end cursor-pointer flex items-center gap-2' tabIndex={0}>
                                     <div className='flex items-center gap-2.5'>
                                         <img sizes={40} src={assets.group8} alt={assets.group8} />
                                         <div className='flex flex-col gap-1'>
@@ -51,8 +51,8 @@ export default function Navbar() {
                                             <p className='text-[14px] font-OpenSans font-light leading-[100%] text-[#FFFFFF80]'>Johnsmith@gmail.com</p>
                                         </div>
                                     </div>
-                                    <div className='dropdown dropdown-end py-2 pl-2 cursor-pointer'>
-                                        <img tabIndex={0} sizes={24} src={assets.arrowDown} alt={assets.arrowDown} />
+                                    <div className='py-2 pl-2 cursor-pointer'>
+                                        <img sizes={24} src={assets.arrowDown} alt={assets.arrowDown} />
                                         <ul
                                             tabIndex="-1"
                                             className="dropdown-content bg-base-200 font-semibold leading-[100%] rounded-[8px] text-[#222222] z-1 mt-4 p-6 drop-shadow-[0px_10px_10px_rgba(0,0,0,0.1)]">

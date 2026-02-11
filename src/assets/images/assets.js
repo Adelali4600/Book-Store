@@ -109,6 +109,12 @@ export const details = [
     },
 ];
 
+export const books = [
+    { id: 1, title: "Rich Dad Poor Dad", author: "Robert T. Kiyosaki", price: "30.00", oldPrice: "45.00", rating: 4.2 },
+    { id: 2, title: "Rich Dad Poor Dad", author: "Robert T. Kiyosaki", price: "30.00", oldPrice: "45.00", rating: 4.2 },
+    { id: 3, title: "Rich Dad Poor Dad", author: "Robert T. Kiyosaki", price: "30.00", oldPrice: "45.00", rating: 4.2 },
+];
+
 export const slidersImages = [
     {
         id: 1,

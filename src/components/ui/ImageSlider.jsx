@@ -1,4 +1,4 @@
-import { Autoplay } from "swiper/modules";
+import { Autoplay, HashNavigation, Pagination, Thumbs } from "swiper/modules";
 import { slidersImages } from "../../assets/images/assets";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
