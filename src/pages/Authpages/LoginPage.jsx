@@ -44,8 +44,8 @@ export default function LoginPage() {
             {/* Form Section */}
             <section className="custom-section-auth">
                 <Formik initialValues={{ identifier: "", password: "", rememberMe: false }} onSubmit={handleLogin} validationSchema={loginSchema}>
-                    <Form className="flex flex-col w-[576px] max-w-2xl">
-                        <div className="flex flex-col gap-6">
+                    <Form className="flex flex-col gap-8 w-[576px] max-w-2xl">
+                        <div className="flex flex-col gap-8">
                             <h1 className='text-[2rem] font-semibold leading-[21.75px] text-center text-mainColor'>
                                 Welcome Back!
                             </h1>
@@ -106,27 +106,25 @@ export default function LoginPage() {
                             </div>
 
                             {/* Login Button */}
-                            <button type='submit' className="w-full btn hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold mb-4">
+                            <button type='submit' className="w-full btn hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold">
                                 Log in
                             </button>
                         </div>
                         {/* Login Link */}
-                        <p className="text-center text-sm text-[#222222] mb-6">
+                        <p className="text-center text-sm text-[#222222]">
                             Don’t have an account?{' '}
                             <Link to="/signup" className="text-[#E91E8C] hover:underline font-medium">
                                 Sign Up
                             </Link>
                         </p>
-                        <div>
+                        <div className="flex flex-col gap-6">
                             {/* Divider */}
-                            <div className="mb-6">
-                                <div className="flex justify-center text-sm">
-                                    <span className="px-4 text-[#00000080]">or</span>
-                                </div>
+                            <div className="flex justify-center text-sm">
+                                <span className="px-4 text-[#00000080]">or</span>
                             </div>
 
                             {/* Social Login Buttons */}
-                            <div className="space-y-3 grid gap-3">
+                            <div className="flex flex-col gap-4">
                                 <Link to="/login" className="w-full flex items-center justify-center gap-3 py-2.5 border border-transparent rounded-md bg-[#FFFFFF] transition-all duration-300 ease-out hover:scale-105 shadow-[0px_1px_3px_0px_#6161610D,0px_5px_5px_0px_#6161610D,0px_11px_6px_0px_#61616108,0px_19px_8px_0px_#61616103,0px_30px_8px_0px_#61616100]">
                                     <FcGoogle size={20} />
                                     <span className="text-sm font-normal text-[#222222]">Login with Google</span>

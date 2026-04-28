@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../../api/Axios";
 
@@ -10,12 +10,18 @@ export default function AddCodePage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (code.length !== 6) {
+            toast.error("Please enter a valid 6-digit code.");
+            return;
+        }
+
         setLoading(true);
 
         try {
             await api.post('/users/verify-code', { code });
             toast.success("Code verified successfully!");
-            navigate('/login'); // Redirect to login after successful verification
+            navigate('/reset-password');
         } catch (error) {
             console.log(error);
             toast.error(error.response?.data?.message || "Invalid code");
@@ -25,47 +31,46 @@ export default function AddCodePage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
-                <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        Verify Your Code
-                    </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
-                        Please enter the verification code sent to your email.
-                    </p>
-                </div>
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                    <div className="rounded-md shadow-sm -space-y-px">
-                        <div className="mb-4">
-                            <label htmlFor="code" className="sr-only">
+        <div className="min-h-screen bg-[#F5F5F5] flex flex-col">
+            <section className="custom-section-auth">
+                <form className="flex flex-col gap-8 w-[576px] max-w-2xl" onSubmit={handleSubmit}>
+                    <div className="flex flex-col gap-8">
+                        <h1 className='text-[2rem] font-semibold leading-[21.75px] text-center text-mainColor'>
+                            Verify Your Code
+                        </h1>
+                        <p className="text-center text-sm text-[#222222]">
+                            Please enter the 6-digit verification code sent to your email.
+                        </p>
+
+                        <div className="grid gap-2 relative">
+                            <label className="flex justify-center text-[1.5rem] leading-[100%] font-semibold text-gray-700">
                                 Verification Code
                             </label>
                             <input
-                                id="code"
                                 name="code"
                                 type="text"
-                                required
-                                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-mainColor focus:border-mainColor focus:z-10 sm:text-sm"
-                                placeholder="Enter 6-digit code"
+                                maxLength={6}
+                                placeholder="------"
                                 value={code}
                                 onChange={(e) => setCode(e.target.value)}
-                                maxLength={6}
+                                className="w-full tracking-[1rem] text-center p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#E91E8C] focus:border-transparent text-[1.5rem] font-bold"
                             />
                         </div>
-                    </div>
 
-                    <div>
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent cursor-pointer text-sm font-medium rounded-md text-white bg-mainColor hover:bg-mainColor/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mainColor disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
+                        {/* Verify Button */}
+                        <button type='submit' disabled={loading} className="w-full btn hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
                             {loading ? 'Verifying...' : 'Verify Code'}
                         </button>
                     </div>
+
+                    <p className="text-center text-sm text-[#222222]">
+                        Didn't receive code?{' '}
+                        <button type="button" onClick={() => toast("Resend code functionality")} className="text-[#E91E8C] hover:underline font-medium cursor-pointer bg-transparent border-none p-0">
+                            Resend code
+                        </button>
+                    </p>
                 </form>
-            </div>
+            </section>
         </div>
     );
 }

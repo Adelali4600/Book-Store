@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import HomePage from "../pages/HomePage";
 import BooksPage from "../pages/BooksPage";
 import AboutPage from "../pages/AboutPage";
@@ -11,27 +10,27 @@ import ForgetPasswordPage from "../pages/Authpages/ForgetPasswordPage";
 import ProfilePage from "../pages/ProfilePage";
 import BeforeLogin from "../layouts/BeforeLogin";
 import Mainlayout from "../layouts/Mainlayout";
+import ProtectedRoute from "../layouts/ProtectedRoute";
 import MyCartPage from "../pages/MyCartPage";
 import WishListPage from "../pages/WishListPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 export default function RouterApp() {
     return (
         <>
-            <Toaster position="top-center" reverseOrder={false}>
-                {({ message }) => (
-                    <div className="bg-white text-mainColor p-4 rounded shadow">
-                        {message}
-                    </div>
-                )}
-            </Toaster>
             <Routes>
-                <Route element={<Mainlayout />}>
-                    <Route path="/" element={<HomePage />} />
+                {/* Public Pages with Main Layout */}
+                <Route path="/" element={<Mainlayout />}>
+                    <Route index element={<HomePage />} />
                     <Route path="books" element={<BooksPage />} />
                     <Route path="about" element={<AboutPage />} />
-                    <Route path="profile" element={<ProfilePage />} />
-                    <Route path="cart" element={<MyCartPage />} />
-                    <Route path="wishlist" element={<WishListPage />} />
+
+                    {/* Protected Pages with Main Layout */}
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="profile" element={<ProfilePage />} />
+                        <Route path="cart" element={<MyCartPage />} />
+                        <Route path="wishlist" element={<WishListPage />} />
+                    </Route>
                 </Route>
                 {/* Auth Pages */}
                 <Route element={<BeforeLogin />} >
@@ -41,6 +40,7 @@ export default function RouterApp() {
                     <Route path="reset-password" element={<ResetPasswordPage />} />
                     <Route path="forget-password" element={<ForgetPasswordPage />} />
                 </Route>
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </>
     )

@@ -1,0 +1,23 @@
+{
+  "navbar": {
+    "home": "Home",
+    "books": "Books",
+    "about": "About Us",
+    "login": "Log in",
+    "signup": "Sign Up",
+    "profile": "Profile",
+    "orderHistory": "Order History",
+    "address": "Address",
+    "help": "Help Center",
+    "logout": "Logout"
+  },
+  "footer": {
+    "rights": "-Developed by: Eraasoft -All Copy Right Reserved @2024",
+    "home": "Home",
+    "books": "Books",
+    "about": "About Us"
+  },
+  "loader": {
+    "loading": "LOADING..."
+  }
+}

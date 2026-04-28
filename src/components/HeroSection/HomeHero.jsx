@@ -1,8 +1,10 @@
 import { assets } from '../../assets/images/assets'
 import { IoSearchOutline } from 'react-icons/io5'
 import { GrMicrophone } from 'react-icons/gr'
+import { useNavigate } from 'react-router-dom'
 
-export default function MainHero() {
+export default function HomeHero() {
+    const navigate = useNavigate()
     return (
         <>
             <main className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
@@ -20,6 +22,7 @@ export default function MainHero() {
                             <GrMicrophone size={18} className='hidden sm:block absolute right-2 sm:right-4 text-[#22222280] cursor-pointer' />
                         </div>
                         <label
+                            onClick={() => navigate('/books')}
                             htmlFor="search"
                             className="text-white text-lg sm:text-2xl font-bold flex justify-center items-center px-4 sm:px-6 py-3 rounded-r-[50px] bg-mainColor hover:bg-mainColor/80 transition-all duration-500 ease-out cursor-pointer"
                         >

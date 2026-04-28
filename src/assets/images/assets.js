@@ -65,24 +65,28 @@ export const dropDown = [
         title: "Profile",
         logo: assets.ffrrUser,
         size: 17,
+        path: "/profile",
     },
     {
         id: 2,
         title: "Order History",
         logo: assets.group122,
         size: 20,
+        path: "/order-history",
     },
     {
         id: 3,
         title: "Address",
         logo: assets.carbonLocation,
         size: 20,
+        path: "/address",
     },
     {
         id: 4,
         title: "Help",
         logo: assets.info1,
         size: 20,
+        path: "/help",
     },
 ];
 

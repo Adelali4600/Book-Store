@@ -81,7 +81,7 @@ export default function SignupPage() {
             {/* Form Section */}
             <section className="custom-section-auth">
                 <Formik initialValues={{ firstName: "", lastName: "", email: "", password: "", confirmPassword: "", conditionPolicy: true }} validationSchema={signupSchema} onSubmit={handleSignup}>
-                    <Form className="flex flex-col w-[576px] max-w-2xl">
+                    <Form className="flex flex-col gap-8 w-[576px] max-w-2xl">
                         <div className="flex flex-col gap-6">
                             {/* First Name & Last Name */}
                             <div className="grid grid-cols-2 gap-4 h-[16%]">
@@ -189,29 +189,27 @@ export default function SignupPage() {
                             </div>
 
                             {/* Sign Up Button */}
-                            <button type='submit' className="cursor-pointer w-full h-[16%] hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold mb-4">
+                            <button type='submit' className="cursor-pointer w-full h-[16%] hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold">
                                 Sign Up
                             </button>
                         </div>
 
                         {/* Login Link */}
-                        <p className="text-center text-sm text-gray-600 mb-6">
+                        <p className="text-center text-sm text-gray-600">
                             Already have an account?{' '}
                             <Link to="/login" className="text-[#E91E8C] hover:underline font-medium">
                                 Login
                             </Link>
                         </p>
 
-                        <div>
+                        <div className="flex flex-col gap-6">
                             {/* Divider */}
-                            <div className="mb-6">
-                                <div className="flex justify-center text-sm">
-                                    <span className="px-4 text-gray-500">or</span>
-                                </div>
+                            <div className="flex justify-center text-sm">
+                                <span className="px-4 text-gray-500">or</span>
                             </div>
 
                             {/* Social Login Buttons */}
-                            <div className="space-y-3 grid gap-3">
+                            <div className="flex flex-col gap-4">
                                 <Link to="/login" className="cursor-pointer w-full flex items-center justify-center gap-3 py-2.5 border border-transparent rounded-md bg-[#FFFFFF] transition-all duration-300 ease-out hover:scale-105 shadow-[0px_1px_3px_0px_#6161610D,0px_5px_5px_0px_#6161610D,0px_11px_6px_0px_#61616108,0px_19px_8px_0px_#61616103,0px_30px_8px_0px_#61616100]">
                                     <FcGoogle size={20} />
                                     <span className="text-sm font-normal text-gray-700">Sign up with Google</span>
