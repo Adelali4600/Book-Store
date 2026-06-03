@@ -4,7 +4,7 @@ import { FaHome, FaBookOpen } from "react-icons/fa";
 export default function NotFoundPage() {
     return (
         <div className="min-h-screen bg-[#F8F9FA] flex flex-col items-center justify-center px-6 text-center">
-            {/* 404 Visual */}
+            {/* ================= 404 Visual ================= */}
             <div className="relative mb-6">
                 <h1 className="text-[130px] md:text-[200px] font-black text-transparent bg-clip-text bg-linear-to-br from-frameColor to-mainColor leading-none select-none drop-shadow-sm">
                     404

@@ -14,7 +14,7 @@ export default function AboutPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white">
 
-            {/* ======================= Hero Section ======================= */}
+            {/* ================= Hero Section ================= */}
             <div className="relative h-[350px] md:h-[450px] flex items-center justify-center text-center overflow-hidden">
                 <div className="absolute inset-0 bg-black/60 z-10"></div>
                 {/* Fallback to online image if assets.libImg fails, though it should exist based on ProfileHero */}
@@ -31,7 +31,7 @@ export default function AboutPage() {
                 </div>
             </div>
 
-            {/* ======================= Our Mission ======================= */}
+            {/* ================= Our Mission ================= */}
             <div className="bg-[#F6F7F9] py-24 px-4 md:px-10 lg:px-20 border-b border-gray-100">
                 <div className="max-w-[1240px] mx-auto text-center flex flex-col gap-14">
                     <h2 className="text-[26px] md:text-3xl font-extrabold text-frameColor">Our Mission</h2>
@@ -52,11 +52,11 @@ export default function AboutPage() {
                 </div>
             </div>
 
-            {/* ======================= Contact Form Section ======================= */}
+            {/* ================= Contact Form Section ================= */}
             <div className="bg-frameColor py-24 px-4 md:px-10 lg:px-20 relative overflow-hidden">
                 <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10 items-center">
 
-                    {/* Left: Form */}
+                    {/* ================= Left: Form ================= */}
                     <div className="flex flex-col gap-6 w-full max-w-[550px]">
                         <h2 className="text-[34px] font-bold text-white leading-[1.3] mb-2 font-Inter">Have a Questions? <br /> Get in Touch</h2>
                         <p className="text-[#a09aa6] text-[14px] leading-relaxed mb-6">
@@ -86,7 +86,7 @@ export default function AboutPage() {
                         </form>
                     </div>
 
-                    {/* ======================= Right: Contact Details ======================= */}
+                    {/* ================= Right: Contact Details ================= */}
                     <div className="flex flex-col justify-center gap-10 lg:pl-16">
                         <div className="flex items-center gap-5">
                             <div className="w-[50px] h-[50px] rounded-2xl bg-white flex items-center justify-center shrink-0 shadow-lg border border-pink-50 hover:scale-105 transition-transform">

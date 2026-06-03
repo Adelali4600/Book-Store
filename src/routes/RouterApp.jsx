@@ -19,20 +19,20 @@ export default function RouterApp() {
     return (
         <>
             <Routes>
-                {/* Public Pages with Main Layout */}
+                {/* ================= Public Pages with Main Layout ================= */}
                 <Route path="/" element={<Mainlayout />}>
                     <Route index element={<HomePage />} />
                     <Route path="books" element={<BooksPage />} />
                     <Route path="about" element={<AboutPage />} />
 
-                    {/* Protected Pages with Main Layout */}
+                    {/* ================= Protected Pages with Main Layout ================= */}
                     <Route element={<ProtectedRoute />}>
                         <Route path="profile" element={<ProfilePage />} />
                         <Route path="cart" element={<MyCartPage />} />
                         <Route path="wishlist" element={<WishListPage />} />
                     </Route>
                 </Route>
-                {/* Auth Pages */}
+                {/* ================= Auth Pages ================= */}
                 <Route element={<BeforeLogin />} >
                     <Route path="login" element={<LoginPage />} />
                     <Route path="signup" element={<SignupPage />} />

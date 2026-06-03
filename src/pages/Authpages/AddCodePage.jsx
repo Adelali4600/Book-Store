@@ -57,7 +57,7 @@ export default function AddCodePage() {
                             />
                         </div>
 
-                        {/* Verify Button */}
+                        {/* ================= Verify Button ================= */}
                         <button type='submit' disabled={loading} className="w-full btn hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
                             {loading ? 'Verifying...' : 'Verify Code'}
                         </button>

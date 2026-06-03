@@ -6,38 +6,30 @@ import { FcGoogle } from 'react-icons/fc';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import api from '../../api/Axios';
 import toast from 'react-hot-toast';
-import { getToken, setAuth } from '../../utils/authStorage';
+import { useAuthStore } from '../../store/useAuthStore';
 
 export default function LoginPage() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [checkGray, setCheckGray] = useState(false);
-    // const login = useAuthStore(state => state.login);
+    const { token, loginAction } = useAuthStore();
 
     useEffect(() => {
-        if (getToken()) {
+        if (token) {
             navigate("/");
         }
-    }, [navigate]);
+    }, [navigate, token]);
 
     const handleLogin = (values) => {
-        const { rememberMe, identifier, password } = values;
-        api.post("/auth/local", { identifier, password })
+        api.post("/auth/local", values)
             .then(res => {
-                const { jwt, user } = res.data;
-                setAuth(jwt, {
-                    id: user.id,
-                    email: user.email,
-                    username: user.username,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                }, rememberMe);
+                loginAction(res.data.jwt, res.data.user, values.rememberMe);
                 navigate("/");
                 toast.success("Login successful");
             })
             .catch(err => {
                 console.log(err);
-                toast.error(err.response?.data?.error?.message);
+                toast.error(err.response?.data?.error?.message || "Login failed");
             });
     }
     const loginSchema = Yup.object({
@@ -47,7 +39,7 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen bg-[#F5F5F5] flex flex-col">
 
-            {/* Form Section */}
+            {/* ================= Form Section ================= */}
             <section className="custom-section-auth">
                 <Formik initialValues={{ identifier: "", password: "", rememberMe: false }} onSubmit={handleLogin} validationSchema={loginSchema}>
                     <Form className="flex flex-col gap-8 w-[576px] max-w-2xl">
@@ -55,7 +47,7 @@ export default function LoginPage() {
                             <h1 className='text-[2rem] font-semibold leading-[21.75px] text-center text-mainColor'>
                                 Welcome Back!
                             </h1>
-                            {/* Email */}
+                            {/* ================= Email ================= */}
                             <div className="grid gap-2">
                                 <label className="block text-[1.5rem] leading-[100%] font-semibold text-gray-700">
                                     Email
@@ -69,7 +61,7 @@ export default function LoginPage() {
                                 <ErrorMessage name="identifier" component={'p'} className="text-red-500 text-sm" />
                             </div>
 
-                            {/* Password */}
+                            {/* ================= Password ================= */}
                             <div className='grid gap-2'>
                                 <label className="block text-[1.5rem] leading-[100%] font-semibold text-gray-700">
                                     Password
@@ -92,7 +84,7 @@ export default function LoginPage() {
                                 <ErrorMessage name="password" component={'p'} className="text-red-500 text-sm" />
                             </div>
 
-                            {/* Remember Checkbox */}
+                            {/* ================= Remember Checkbox ================= */}
                             <div className="flex justify-between items-center gap-2">
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <Field
@@ -111,12 +103,12 @@ export default function LoginPage() {
                                 </Link>
                             </div>
 
-                            {/* Login Button */}
+                            {/* ================= Login Button ================= */}
                             <button type='submit' className="w-full btn hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold">
                                 Log in
                             </button>
                         </div>
-                        {/* Login Link */}
+                        {/* ================= Login Link ================= */}
                         <p className="text-center text-sm text-[#222222]">
                             Don’t have an account?{' '}
                             <Link to="/signup" className="text-[#E91E8C] hover:underline font-medium">
@@ -124,19 +116,19 @@ export default function LoginPage() {
                             </Link>
                         </p>
                         <div className="flex flex-col gap-6">
-                            {/* Divider */}
+                            {/* ================= Divider ================= */}
                             <div className="flex justify-center text-sm">
                                 <span className="px-4 text-[#00000080]">or</span>
                             </div>
 
-                            {/* Social Login Buttons */}
+                            {/* ================= Social Login Buttons ================= */}
                             <div className="flex flex-col gap-4">
                                 <Link to="/login" className="w-full flex items-center justify-center gap-3 py-2.5 border border-transparent rounded-md bg-[#FFFFFF] transition-all duration-300 ease-out hover:scale-105 shadow-[0px_1px_3px_0px_#6161610D,0px_5px_5px_0px_#6161610D,0px_11px_6px_0px_#61616108,0px_19px_8px_0px_#61616103,0px_30px_8px_0px_#61616100]">
                                     <FcGoogle size={20} />
                                     <span className="text-sm font-normal text-[#222222]">Login with Google</span>
                                 </Link>
 
-                                {/* Icon Facebook */}
+                                {/* ================= Icon Facebook ================= */}
                                 <Link to="/login" className="w-full flex items-center justify-center gap-3 py-2.5 border border-transparent bg-[#FFFFFF] rounded-md hover:scale-105 transition-all duration-300 ease-out shadow-[0px_1px_3px_0px_#6161610D,0px_5px_5px_0px_#6161610D,0px_11px_6px_0px_#61616108,0px_19px_8px_0px_#61616103,0px_30px_8px_0px_#61616100]">
                                     <FaFacebook size={20} className="text-[#1877F2]" />
                                     <span className="text-sm font-normal text-[#222222]">Login with Facebook</span>

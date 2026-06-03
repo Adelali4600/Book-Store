@@ -8,7 +8,7 @@ export default function BookCard({ book }) {
 
     return (
         <div className="flex flex-col gap-4 w-full max-w-[280px]">
-            {/* Book Image */}
+            {/* ================= Book Image ================= */}
             <div className="relative group overflow-hidden rounded-lg bg-[#F5F5F5] aspect-2/3 flex items-center justify-center cursor-pointer" onClick={() => navigate('/books')}>
                 <img
                     src={book.image}
@@ -16,7 +16,7 @@ export default function BookCard({ book }) {
                     className="w-[70%] h-auto shadow-md group-hover:scale-110 transition-transform duration-500 ease-in-out"
                 />
 
-                {/* Hover Actions */}
+                {/* ================= Hover Actions ================= */}
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button onClick={(e) => { e.stopPropagation(); navigate('/cart'); }} className="bg-white text-mainColor p-3 rounded-full hover:bg-mainColor hover:text-white transition-colors duration-300 shadow-lg">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@ export default function BookCard({ book }) {
                 </div>
             </div>
 
-            {/* Book Info */}
+            {/* ================= Book Info ================= */}
             <div className="flex flex-col gap-1 px-1">
                 <h3 className="font-bold text-lg text-secondColor truncate cursor-pointer hover:text-mainColor transition-colors" title={book.title}>
                     {book.title}
@@ -38,7 +38,7 @@ export default function BookCard({ book }) {
                     {book.author}
                 </p>
 
-                {/* Rating */}
+                {/* ================= Rating ================= */}
                 <div className="flex items-center gap-2 mt-1">
                     <div className="flex text-star text-sm gap-0.5">
                         <GrStar className={book.rating >= 1 ? "fill-current" : "text-gray-200"} />
@@ -52,7 +52,7 @@ export default function BookCard({ book }) {
                     </span>
                 </div>
 
-                {/* Price */}
+                {/* ================= Price ================= */}
                 <div className="flex items-center gap-3 mt-2">
                     <span className="text-lg font-bold text-gray-900">${book.price.toFixed(2)}</span>
                     {book.oldPrice && (

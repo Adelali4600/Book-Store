@@ -8,9 +8,9 @@ export default function HomeHero() {
     return (
         <>
             <main className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
-                {/* Overlay */}
+                {/* ================= Overlay ================= */}
                 <div className="absolute bg-black/60 z-10 h-full w-full flex justify-center items-center px-4 sm:px-6 md:px-8">
-                    {/* Search Section */}
+                    {/* ================= Search Section ================= */}
                     <div className="flex border border-[#22222233] w-full max-w-[536px] rounded-[50px]">
                         <div className='flex items-center grow bg-[#FFFFFF] rounded-l-[50px] relative pr-2 sm:pr-4 border border-[#22222233]'>
                             <input

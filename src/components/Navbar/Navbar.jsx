@@ -7,17 +7,16 @@ import { FaRegHeart, FaTimes } from 'react-icons/fa';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import { getToken, getUser, clearAuth } from '../../utils/authStorage';
+import { useAuthStore } from '../../store/useAuthStore';
 
 export default function Navbar() {
     const { t } = useTranslation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const token = getToken();
-    const user = getUser();
+    const { token, user, logoutAction } = useAuthStore();
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        clearAuth();
+        logoutAction();
         navigate('/login');
         toast.error('Logged out!!');
     };
@@ -122,7 +121,7 @@ export default function Navbar() {
                         )}
                     </button>
                 </div>
-                {/* Mobile Menu */}
+                {/* ================= Mobile Menu ================= */}
                 {isMenuOpen && (
                     <div className="lg:hidden absolute top-full left-0 right-0 bg-white/20 backdrop-blur-md">
                         <div className="flex flex-col gap-2 p-4">

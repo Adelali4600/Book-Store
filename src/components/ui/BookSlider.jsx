@@ -4,7 +4,7 @@ import { Autoplay, EffectCoverflow, Navigation } from 'swiper/modules';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 import 'swiper/css';
-import { GrStar } from 'react-icons/gr';
+// import { GrStar } from 'react-icons/gr';
 import RatingStars from './RatingStars';
 // import { books } from '../assets/images/assets';
 

@@ -1,49 +1,42 @@
-const TOKEN_KEY = 'token';
-const USER_KEY = 'user';
+export const getToken = () => {
+    return localStorage.getItem('token') || sessionStorage.getItem('token') || null;
+};
 
-export const getToken = () =>
-    localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
+export const setToken = (token, rememberMe = false) => {
+    if (rememberMe) {
+        localStorage.setItem('token', token);
+        sessionStorage.removeItem('token');
+    } else {
+        sessionStorage.setItem('token', token);
+        localStorage.removeItem('token');
+    }
+};
 
 export const getUser = () => {
-    const stored = localStorage.getItem(USER_KEY) || sessionStorage.getItem(USER_KEY);
-    if (!stored) return null;
+    const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
+    if (!userStr) return null;
     try {
-        return JSON.parse(stored);
-    } catch {
+        return JSON.parse(userStr);
+    } catch (e) {
+        console.error("Failed to parse user from storage:", e);
         return null;
     }
 };
 
-export const setToken = (jwt, rememberMe = false) => {
-    localStorage.removeItem(TOKEN_KEY);
-    sessionStorage.removeItem(TOKEN_KEY);
-    (rememberMe ? localStorage : sessionStorage).setItem(TOKEN_KEY, jwt);
-};
-
 export const setUser = (user, rememberMe = false) => {
-    localStorage.removeItem(USER_KEY);
-    sessionStorage.removeItem(USER_KEY);
-    (rememberMe ? localStorage : sessionStorage).setItem(USER_KEY, JSON.stringify(user));
-};
-
-export const setAuth = (jwt, user, rememberMe = false) => {
-    setToken(jwt, rememberMe);
-    setUser(user, rememberMe);
-};
-
-export const removeToken = () => {
-    localStorage.removeItem(TOKEN_KEY);
-    sessionStorage.removeItem(TOKEN_KEY);
-};
-
-export const removeUser = () => {
-    localStorage.removeItem(USER_KEY);
-    sessionStorage.removeItem(USER_KEY);
+    const userStr = JSON.stringify(user);
+    if (rememberMe) {
+        localStorage.setItem('user', userStr);
+        sessionStorage.removeItem('user');
+    } else {
+        sessionStorage.setItem('user', userStr);
+        localStorage.removeItem('user');
+    }
 };
 
 export const clearAuth = () => {
-    removeToken();
-    removeUser();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
 };
-
-export const isAuthenticated = () => !!getToken();

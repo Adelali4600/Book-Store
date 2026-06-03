@@ -3,7 +3,6 @@ import BestSellers from "../components/Home/BestSellers";
 import FeaturedBooks from "../components/Home/FeaturedBooks";
 import TimerComp from "../components/ui/TimerComp";
 import BookSlider from "../components/ui/BookSlider";
-import AuthorSection from "../components/Home/AuthorSection";
 import HomeHero from "../components/HeroSection/HomeHero";
 
 export default function HomePage() {
@@ -13,13 +12,13 @@ export default function HomePage() {
 
          <BenefitCompo />
 
-         {/* ======================= Best Seller Books ======================= */}
+         {/* ================= Best Seller Books ================= */}
          <BestSellers />
 
-         {/* ======================= Recommended For You ======================= */}
+         {/* ================= Recommended For You ================= */}
          <FeaturedBooks />
 
-         {/* ======================= Flash Sale Book Carousel ======================= */}
+         {/* ================= Flash Sale Book Carousel ================= */}
          <section className="px-5 py-10 md:px-[60px] md:py-[80px] border-t border-gray-100 flex flex-col gap-10 md:gap-14 bg-white">
             <div className="container mx-auto flex flex-col md:flex-row gap-8 md:gap-4 justify-between items-center">
                <div className="flex flex-col gap-4 text-center md:text-left items-center md:items-start">

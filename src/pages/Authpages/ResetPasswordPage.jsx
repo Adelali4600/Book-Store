@@ -56,7 +56,7 @@ export default function ResetPasswordPage() {
                                 Enter your new password below to reset your account credentials.
                             </p>
 
-                            {/* Password */}
+                            {/* ================= Password ================= */}
                             <div className='grid gap-2 relative'>
                                 <label className="block text-[1.5rem] leading-[100%] font-semibold text-gray-700">
                                     New Password
@@ -79,7 +79,7 @@ export default function ResetPasswordPage() {
                                 <ErrorMessage name="password" component={'p'} className="absolute top-0 right-0 text-red-500 text-sm" />
                             </div>
 
-                            {/* Confirm Password */}
+                            {/* ================= Confirm Password ================= */}
                             <div className='grid gap-2 relative'>
                                 <label className="block text-[1.5rem] leading-[100%] font-semibold text-gray-700">
                                     Confirm New Password
@@ -102,7 +102,7 @@ export default function ResetPasswordPage() {
                                 <ErrorMessage name="confirmPassword" component={'p'} className="absolute top-0 right-0 text-red-500 text-sm" />
                             </div>
 
-                            {/* Reset Button */}
+                            {/* ================= Reset Button ================= */}
                             <button type='submit' disabled={loading} className="w-full btn hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
                                 {loading ? 'Resetting...' : 'Reset Password'}
                             </button>

@@ -3,7 +3,7 @@ import { assets } from '../../assets/images/assets'
 export default function HeroAbout() {
     return (
         <main className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
-            {/* Overlay */}
+            {/* ================= Overlay ================= */}
             <div className="absolute bg-[#000000CC] z-10 h-full w-full flex justify-center items-center px-4 sm:px-6 md:px-8">
                 {/* ======================= About Bookshop ======================= */}
                 <div className="w-full max-w-[652px] md:w-3/4 lg:w-1/2 flex flex-col items-center gap-4">

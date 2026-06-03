@@ -16,7 +16,7 @@ export default function Footer() {
         <footer className="bg-[#2C2640] flex justify-center text-white py-16 md:py-32 px-6 lg:px-16" >
             <div className="w-full max-w-[1300px]">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0 mb-10 md:mb-6">
-                    {/* Logo & Navigation */}
+                    {/* ================= Logo & Navigation ================= */}
                     <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
                         <div className="flex items-center gap-2">
                             <NavbarLogo />
@@ -28,7 +28,7 @@ export default function Footer() {
                         </nav>
                     </div>
 
-                    {/* Social Icons */}
+                    {/* ================= Social Icons ================= */}
                     <div className="flex gap-5">
                         <a href="#" className="hover:text-gray-300 transition">
                             <FaFacebook size={24} />
@@ -45,7 +45,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Copyright & Language */}
+                {/* ================= Copyright & Language ================= */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 pt-6 border-t border-gray-600 text-center md:text-left">
                     <p className="text-[13px] md:text-sm text-gray-400">
                         {t('footer.rights')}

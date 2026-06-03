@@ -1,11 +1,56 @@
 import { assets } from "../assets/images/assets";
+import { useAuthStore } from "../store/useAuthStore";
+import { useState, useEffect } from "react";
+import api from "../api/Axios";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
+    const { user, updateUserAction } = useAuthStore();
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            setFirstName(user.firstName || "");
+            setLastName(user.lastName || "");
+            setEmail(user.email || "");
+            setPhone(user.phone || "");
+            setAddress(user.address || "");
+        }
+    }, [user]);
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        if (!user) return;
+        setLoading(true);
+        try {
+            const res = await api.put(`/users/${user.id}`, {
+                firstName,
+                lastName,
+                email,
+                phone,
+                address
+            });
+            updateUserAction(res.data);
+            toast.success("Profile updated successfully!");
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.error?.message || "Failed to update profile");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <>
             <div className="bg-[#F5F5F5] min-h-screen pb-24 flex flex-col items-center">
 
-                {/* ======================= Profile Avatar overlapping MainHero ======================= */}
+                {/* ================= Profile Avatar overlapping MainHero ================= */}
                 <div className="relative -mt-[70px] z-10 mb-8 flex justify-center">
                     <div className="w-[140px] h-[140px] rounded-full overflow-hidden bg-white shadow-sm">
                         <img
@@ -14,7 +59,7 @@ export default function ProfilePage() {
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    {/* ======================= Edit Icon Badge ======================= */}
+                    {/* ================= Edit Icon Badge ================= */}
                     <button className="absolute bottom-2 right-1 w-9 h-9 rounded-full bg-mainColor text-white flex items-center justify-center border-[3px] border-white shadow-sm hover:scale-105 transition-transform cursor-pointer">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_150_1952)">
@@ -29,18 +74,19 @@ export default function ProfilePage() {
                     </button>
                 </div>
 
-                {/* ======================= General Information Card ======================= */}
+                {/* ================= General Information Card ================= */}
                 <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 max-w-[700px] w-full px-6 py-10 sm:px-12 sm:py-10 mx-4">
                     <h2 className="text-center text-[20px] font-bold text-gray-800 mb-10">General information</h2>
 
-                    <form className="flex flex-col gap-6">
-                        {/* ======================= First & Last Name ======================= */}
+                    <form onSubmit={handleUpdate} className="flex flex-col gap-6">
+                        {/* ================= First & Last Name ================= */}
                         <div className="flex flex-col sm:flex-row gap-6">
                             <div className="flex flex-col gap-2 flex-1">
                                 <label className="text-[13px] text-gray-400 font-medium ml-1">First Name</label>
                                 <input
                                     type="text"
-                                    defaultValue="John"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
                                     className="w-full px-4 py-3.5 rounded-lg border border-gray-200 outline-none focus:border-mainColor text-gray-700 bg-transparent transition-colors text-[14px]"
                                 />
                             </div>
@@ -48,47 +94,55 @@ export default function ProfilePage() {
                                 <label className="text-[13px] text-gray-400 font-medium ml-1">Last Name</label>
                                 <input
                                     type="text"
-                                    defaultValue="Smith"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
                                     className="w-full px-4 py-3.5 rounded-lg border border-gray-200 outline-none focus:border-mainColor text-gray-700 bg-transparent transition-colors text-[14px]"
                                 />
                             </div>
                         </div>
 
-                        {/* ======================= Email ======================= */}
+                        {/* ================= Email ================= */}
                         <div className="flex flex-col gap-2">
                             <label className="text-[13px] text-gray-400 font-medium ml-1">Email</label>
                             <input
                                 type="email"
-                                defaultValue="johnsmith@gmail.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full px-4 py-3.5 rounded-lg border border-gray-200 outline-none focus:border-mainColor text-gray-700 bg-transparent transition-colors text-[14px]"
                             />
                         </div>
 
-                        {/* ======================= Phone number ======================= */}
+                        {/* ================= Phone number ================= */}
                         <div className="flex flex-col gap-2">
                             <label className="text-[13px] text-gray-400 font-medium ml-1">Phone number</label>
                             <input
                                 type="tel"
-                                defaultValue="123456789"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                                 className="w-full px-4 py-3.5 rounded-lg border border-gray-200 outline-none focus:border-mainColor text-gray-700 bg-transparent transition-colors text-[14px]"
                             />
                         </div>
 
-                        {/* ======================= Address ======================= */}
+                        {/* ================= Address ================= */}
                         <div className="flex flex-col gap-2">
                             <label className="text-[13px] text-gray-400 font-medium ml-1">Address</label>
                             <input
                                 type="text"
-                                defaultValue="Maadi, Cairo, Egypt."
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
                                 className="w-full px-4 py-3.5 rounded-lg border border-gray-200 outline-none focus:border-mainColor text-gray-700 bg-transparent transition-colors text-[14px]"
                             />
                         </div>
                     </form>
                 </div>
 
-                {/* ======================= Update Button ======================= */}
-                <button className="mt-8 bg-mainColor hover:bg-mainColor/90 text-white font-medium py-3.5 px-12 rounded-lg transition-colors text-[15px] shadow-sm cursor-pointer">
-                    Update information
+                {/* ================= Update Button ================= */}
+                <button 
+                    onClick={handleUpdate}
+                    disabled={loading}
+                    className="mt-8 bg-mainColor hover:bg-mainColor/90 text-white font-medium py-3.5 px-12 rounded-lg transition-colors text-[15px] shadow-sm cursor-pointer disabled:opacity-50"
+                >
+                    {loading ? "Updating..." : "Update information"}
                 </button>
 
             </div>

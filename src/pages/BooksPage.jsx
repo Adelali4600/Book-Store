@@ -15,25 +15,25 @@ export default function BooksPage() {
         <div className="min-h-screen bg-[#F0F0F0] py-10">
             <div className="max-w-[1300px] mx-auto px-4 sm:px-6 flex flex-col md:flex-row gap-6 items-start">
 
-                {/* ======= Sidebar ======= */}
+                {/* ================= Sidebar ================= */}
                 <SidebarFilters />
 
-                {/* ======= Main Content ======= */}
+                {/* ================= Main Content ================= */}
                 <div className="flex-1 w-full flex flex-col gap-5">
 
-                    {/* ===== Search + Sort Row ===== */}
+                    {/* ================= Search + Sort Row ================= */}
                     <div className="flex flex-col sm:flex-row gap-3 items-center">
-                        {/* Search Bar Component */}
+                        {/* ================= Search Bar Component ================= */}
                         <SearchBar
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
 
-                        {/* Sort By Dropdown */}
+                        {/* ================= Sort By Dropdown ================= */}
                         <SortByDropdown value={sortBy} onChange={setSortBy} />
                     </div>
 
-                    {/* ===== Category Tags ===== */}
+                    {/* ================= Category Tags ================= */}
                     <div className="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar flex-nowrap">
                         {ALL_CATEGORIES.map((cat) => (
                             <button
@@ -49,7 +49,7 @@ export default function BooksPage() {
                         ))}
                     </div>
 
-                    {/* ===== Book Cards ===== */}
+                    {/* ================= Book Cards ================= */}
                     <BookGrid searchQuery={searchQuery} activeCategory={activeCategory} />
                 </div>
             </div>

@@ -43,7 +43,7 @@ export default function ForgetPasswordPage() {
                                 Enter the email address associated with your account and we&apos;ll send you a link to reset your password.
                             </p>
 
-                            {/* Email */}
+                            {/* ================= Email ================= */}
                             <div className="grid gap-2 relative">
                                 <label className="block text-[1.5rem] leading-[100%] font-semibold text-gray-700">
                                     Email
@@ -57,12 +57,12 @@ export default function ForgetPasswordPage() {
                                 <ErrorMessage name="email" component={'p'} className="absolute top-0 right-0 text-red-500" />
                             </div>
 
-                            {/* Reset Button */}
+                            {/* ================= Reset Button ================= */}
                             <button type='submit' disabled={loading} className="w-full btn hover:scale-105 transition-all duration-300 ease-out bg-mainColor hover:bg-mainColor/90 text-white py-3 px-4 rounded-md font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
                                 {loading ? 'Sending...' : 'Send reset code'}
                             </button>
                         </div>
-                        {/* Login Link */}
+                        {/* ================= Login Link ================= */}
                         <p className="text-center text-sm text-[#222222]">
                             Remembered your password?{' '}
                             <Link to="/login" className="text-[#E91E8C] hover:underline font-medium">
