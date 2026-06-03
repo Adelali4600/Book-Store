@@ -4,7 +4,7 @@ export default function BookCard({ product }) {
             <div className="card bg-base-100 w-full shadow-sm">
                 <figure>
                     <img
-                        src={`http://localhost:1337${product.pro_image.url}`}
+                        src={`${import.meta.env.VITE_STRAPI_URL}${product.pro_image.url}`}
                         alt="Shoes" />
                 </figure>
                 <div className="card-body">

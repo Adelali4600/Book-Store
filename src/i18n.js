@@ -13,8 +13,8 @@ i18n
     fallbackLng: 'en', // Default to English if detection fails
     detection: {
       // Order of detecting user language
-      order: ['queryString', 'cookie', 'localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
-      caches: ['localStorage', 'cookie'], // Cache the language setting
+      order: ['queryString', 'localStorage', 'navigator', 'htmlTag', 'path'],
+      caches: ['localStorage'],
     },
     backend: {
       loadPath: '/locales/{{lng}}/translation.json', // Path to translation files

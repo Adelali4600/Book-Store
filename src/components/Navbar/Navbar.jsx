@@ -7,18 +7,17 @@ import { FaRegHeart, FaTimes } from 'react-icons/fa';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { getToken, getUser, clearAuth } from '../../utils/authStorage';
 
 export default function Navbar() {
     const { t } = useTranslation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // const logout = useAuthStore(state => state.logout);
-    // const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const token = getToken();
+    const user = getUser();
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        // isAuthenticated ? logout() : navigate('/login');
-        localStorage.removeItem("token") || sessionStorage.removeItem("token");
+        clearAuth();
         navigate('/login');
         toast.error('Logged out!!');
     };
@@ -65,8 +64,14 @@ export default function Navbar() {
                                     <div className='hidden md:flex items-center gap-2.5'>
                                         <img sizes={40} src={assets.group8} alt={assets.group8} />
                                         <div className='flex flex-col gap-1'>
-                                            <h3 className='text-[1rem] font-OpenSans font-semibold leading-[100%] text-[#FFFFFF]'>John Smith</h3>
-                                            <p className='text-[14px] font-OpenSans font-light leading-[100%] text-[#FFFFFF80]'>Johnsmith@gmail.com</p>
+                                            <h3 className='text-[1rem] font-OpenSans font-semibold leading-[100%] text-[#FFFFFF]'>
+                                                {user?.firstName && user?.lastName
+                                                    ? `${user.firstName} ${user.lastName}`
+                                                    : user?.username || 'User'}
+                                            </h3>
+                                            <p className='text-[14px] font-OpenSans font-light leading-[100%] text-[#FFFFFF80]'>
+                                                {user?.email || ''}
+                                            </p>
                                         </div>
                                     </div>
                                     {/* ======================= Dropdown Menu ======================= */}

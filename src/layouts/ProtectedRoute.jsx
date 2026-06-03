@@ -2,29 +2,33 @@ import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import api from '../api/Axios'
+import { getToken, clearAuth, setUser } from '../utils/authStorage'
 
 export default function ProtectedRoute() {
     const navigate = useNavigate();
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const token = getToken();
 
     useEffect(() => {
-        // 1. لو مفيش توكين أصلاً ملوش لازمة نكلم السيرفر
         if (!token) {
             navigate('/login');
             toast.error("Please login first!");
             return;
         }
 
-        // 2. لو فيه توكين نبعته للسيرفر نتأكد هو سليم ولا مضروب
-        api.get('/users/me', {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            }
-        })
+        api.get('/users/me')
+            .then((res) => {
+                setUser({
+                    id: res.data.id,
+                    email: res.data.email,
+                    username: res.data.username,
+                    firstName: res.data.firstName,
+                    lastName: res.data.lastName,
+                }, !!localStorage.getItem('token'));
+            })
             .catch((err) => {
                 console.log(err.data);
                 toast.error("Token is fake or expired!");
-                localStorage.removeItem('token') || sessionStorage.removeItem('token');
+                clearAuth();
                 navigate('/login');
             });
     }, [navigate, token]);

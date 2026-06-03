@@ -4,20 +4,20 @@ import { FaEye, FaEyeSlash, FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import axios from 'axios';
+import api from '../../api/Axios';
 import toast from 'react-hot-toast';
+import { getToken, setAuth, setUser } from '../../utils/authStorage';
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
     useEffect(() => {
-        if (token) {
+        if (getToken()) {
             navigate('/');
         }
-        console.log(token);
-    }, [navigate, token]);
+    }, [navigate]);
     const handleSignup = (values) => {
         // 1. بيانات التسجيل الأساسية (التي يقبلها Strapi في الـ Auth)
         const registerData = {
@@ -29,30 +29,28 @@ export default function SignupPage() {
         console.log("البيانات المرسلة للتسجيل:", registerData);
 
         // الطلب الأول: إنشاء الحساب
-        axios.post("http://localhost:1337/api/auth/local/register", registerData)
-            .then((res) => {
-                if (res.data && res.data.jwt) {
-                    const userId = res.data.user.id;
-                    const token = res.data.jwt;
+        api.post('/auth/local/register', registerData)
+            .then(async (res) => {
+                if (!res.data?.jwt) return;
 
-                    console.log("تم التسجيل بنجاح، ID المستخدم:", userId);
+                const jwt = res.data.jwt;
+                const { id, email, username } = res.data.user;
 
-                    // الطلب الثاني: تحديث الأسماء (firstName, lastName)
-                    return axios.put(`http://localhost:1337/api/users/${userId}`,
-                        {
-                            firstName: values.firstName,
-                            lastName: values.lastName,
-                        },
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token}`
-                            }
-                        }
-                    );
-                }
-            })
-            .then(() => {
-                // تنفيذ هذا الكود عند نجاح الطلب الثاني (التحديث)
+                setAuth(jwt, { id, email, username }, true);
+
+                await api.put(`/users/${id}`, {
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                });
+
+                setUser({
+                    id,
+                    email,
+                    username,
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                }, true);
+
                 toast.success("Signup successful!");
                 navigate("/");
             })

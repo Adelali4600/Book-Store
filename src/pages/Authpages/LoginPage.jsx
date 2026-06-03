@@ -6,6 +6,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import api from '../../api/Axios';
 import toast from 'react-hot-toast';
+import { getToken, setAuth } from '../../utils/authStorage';
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -14,18 +15,23 @@ export default function LoginPage() {
     // const login = useAuthStore(state => state.login);
 
     useEffect(() => {
-        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-        if (token) {
-            // login(token);
+        if (getToken()) {
             navigate("/");
         }
     }, [navigate]);
 
     const handleLogin = (values) => {
-        api.post("/auth/local", values)
+        const { rememberMe, identifier, password } = values;
+        api.post("/auth/local", { identifier, password })
             .then(res => {
-                // login(res.data.jwt);
-                values.rememberMe ? localStorage.setItem("token", res.data.jwt) : sessionStorage.setItem("token", res.data.jwt);
+                const { jwt, user } = res.data;
+                setAuth(jwt, {
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                }, rememberMe);
                 navigate("/");
                 toast.success("Login successful");
             })
